@@ -1,5 +1,12 @@
 <?php
 
 return [
-
+    'no_extra_blank_lines' => [
+        'tokens' => [
+            'extra',
+            'throw',
+            'use',
+            'curly_brace_block',
+        ],
+    ],
 ];

@@ -12,7 +12,6 @@ class DirtyExample extends \stdClass
 
     public function testMethod($a = ['x' => 1, 'y' => 2,  'z' => 3])
     {
-
         $var = 1 + 2;
         $text = 'hello';
         $list = ['a',    'b',  'c'];
@@ -45,6 +44,5 @@ class DirtyExample extends \stdClass
             'text' => $text,
 
         ];
-
     }
 }
