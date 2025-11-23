@@ -258,5 +258,5 @@ return (new Config)
     ->setRules($rules)
     ->setFinder($finder)
     ->setRiskyAllowed(true)
-    ->setUsingCache(true)
+    ->setUsingCache(false)
     ->setUnsupportedPhpVersionAllowed(true);
