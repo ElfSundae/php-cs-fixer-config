@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Update dependencies and generate a new PHP CS Fixer configuration file.
+# Update dependencies and generate new configuration files.
 
 # Determine sed in-place editing option for macOS or Linux
 if [[ "$(uname)" == "Darwin" ]]; then
