@@ -1,0 +1,16 @@
+{
+    "name": "elfsundae/php-cs-fixer-config",
+    "license": "MIT",
+    "type": "project",
+    "require-dev": {
+        "brick/varexporter": "^0.6.0",
+        "friendsofphp/php-cs-fixer": "^3.90",
+        "laravel/pint": "^1.25"
+    },
+    "prefer-stable": true,
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
+}
