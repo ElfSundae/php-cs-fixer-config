@@ -1,6 +1,6 @@
 # PHP CS Fixer Config
 
-Generate PHP CS Fixer and Laravel Pint configuration files based on Laravel’s official coding style, with a few lightweight custom enhancements.
+Generate [PHP CS Fixer](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer) and [Laravel Pint](https://laravel.com/docs/pint) configuration files based on Laravel’s official coding style, with a few lightweight custom enhancements.
 
 This project includes:
 
