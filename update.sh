@@ -22,11 +22,17 @@ sed "${SED_INPLACE[@]}" '/^use .*;/ { N; d; }' "$laravel"
 sed "${SED_INPLACE[@]}" 's/return .*(\[/return [/' "$laravel"
 sed "${SED_INPLACE[@]}" 's/]);/];/' "$laravel"
 
-echo "Generating PHP CS Fixer configuration file..."
+echo "Generating configuration files..."
 php generate.php
+
+echo
 
 dirty_src="assets/DirtyExample.php"
 dirty_dest="assets/DirtyExample.fixed.php"
-echo "Fixing $dirty_src..."
+echo "Fix CS for $dirty_src"
+
 cp "$dirty_src" "$dirty_dest"
-./vendor/bin/php-cs-fixer fix "$dirty_dest" --config=.php-cs-fixer.php
+./vendor/bin/php-cs-fixer fix "$dirty_dest"
+
+cp "$dirty_src" "$dirty_dest"
+./vendor/bin/pint "$dirty_dest"

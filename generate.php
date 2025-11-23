@@ -5,20 +5,28 @@ require __DIR__.'/vendor/autoload.php';
 
 use Brick\VarExporter\VarExporter;
 
-$outputFile = __DIR__.'/.php-cs-fixer.php';
+$pcfConfigFile = __DIR__.'/.php-cs-fixer.php';
+$pintConfigFile = __DIR__.'/pint.json';
 
-$rules = array_merge(
-    require __DIR__.'/assets/laravel-ruleset.php',
-    require __DIR__.'/assets/custom-rules.php'
-);
-ksort($rules);
+$customRules = require __DIR__.'/assets/custom-rules.php';
 
-$content = file_get_contents(__DIR__.'/assets/.php-cs-fixer.template.php');
-$content = str_replace("['{{exported}}']", VarExporter::export(
-    $rules, VarExporter::INLINE_SCALAR_LIST | VarExporter::TRAILING_COMMA_IN_ARRAY
-), $content);
-file_put_contents($outputFile, $content);
+// Generate php-cs-fixer config file
+$pcfRules = array_merge(require __DIR__.'/assets/laravel-ruleset.php', $customRules);
+ksort($pcfRules);
 
-exec(__DIR__.'/vendor/bin/pint '.escapeshellarg($outputFile));
+$pcfConfig = file_get_contents(__DIR__.'/assets/.php-cs-fixer.template.php');
+$pcfConfig = str_replace("['{{exported}}']", VarExporter::export(
+    $pcfRules, VarExporter::INLINE_SCALAR_LIST | VarExporter::TRAILING_COMMA_IN_ARRAY
+), $pcfConfig);
+file_put_contents($pcfConfigFile, $pcfConfig);
+echo 'Generated PHP CS Fixer configuration file: '.$pcfConfigFile.PHP_EOL;
 
-echo 'Generated PHP CS Fixer configuration file: '.$outputFile.PHP_EOL;
+// Generate Laravel Pint config file
+$pintConfig = [
+    'preset' => 'laravel',
+    'rules' => $customRules,
+];
+file_put_contents($pintConfigFile, json_encode(
+    $pintConfig, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+));
+echo 'Generated Laravel Pint configuration file: '.$pintConfigFile.PHP_EOL;

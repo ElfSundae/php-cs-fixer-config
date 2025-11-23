@@ -2,6 +2,9 @@
     "name": "elfsundae/php-cs-fixer-config",
     "license": "MIT",
     "type": "project",
+    "require": {
+        "php": "^8.2"
+    },
     "require-dev": {
         "brick/varexporter": "^0.6.0",
         "friendsofphp/php-cs-fixer": "^3.90",
@@ -10,6 +13,9 @@
     "prefer-stable": true,
     "config": {
         "optimize-autoloader": true,
+        "platform": {
+            "php": "8.2.0"
+        },
         "preferred-install": "dist",
         "sort-packages": true
     }
