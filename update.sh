@@ -17,10 +17,13 @@ composer update -q
 
 laravel=assets/laravel-ruleset.php
 echo "Updating $laravel..."
-wget -q -O "$laravel" https://raw.githubusercontent.com/laravel/pint/HEAD/resources/presets/laravel.php
-sed "${SED_INPLACE[@]}" '/^use .*;/ { N; d; }' "$laravel"
-sed "${SED_INPLACE[@]}" 's/return .*(\[/return [/' "$laravel"
-sed "${SED_INPLACE[@]}" 's/]);/];/' "$laravel"
+if curl -fsSL -o "$laravel" https://raw.githubusercontent.com/laravel/pint/HEAD/resources/presets/laravel.php; then
+    sed "${SED_INPLACE[@]}" '/^use .*;/ { N; d; }' "$laravel"
+    sed "${SED_INPLACE[@]}" 's/return .*(\[/return [/' "$laravel"
+    sed "${SED_INPLACE[@]}" 's/]);/];/' "$laravel"
+else
+    git restore "$laravel"
+fi
 
 echo "Generating configuration files..."
 php generate.php
