@@ -4,7 +4,7 @@ Generate [PHP CS Fixer](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer) and [Larav
 
 This project includes:
 
-- `update.sh`: Update dependencies and regenerate all config files.
+- `update.sh`: Install dependencies and regenerate all config files.
 - `generate.php`: Build the final config files.
 - Pre-generated [`.php-cs-fixer.php`](https://raw.githubusercontent.com/ElfSundae/php-cs-fixer-config/HEAD/.php-cs-fixer.php) and [`pint.json`](https://raw.githubusercontent.com/ElfSundae/php-cs-fixer-config/HEAD/pint.json) ready for direct use.
 
