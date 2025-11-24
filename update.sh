@@ -12,8 +12,8 @@ fi
 
 cd "$(dirname "$0")"
 
-echo "Updating dependencies..."
-composer update -q
+echo "Installing dependencies..."
+composer install -q
 
 laravel=assets/laravel-ruleset.php
 echo "Updating $laravel..."
