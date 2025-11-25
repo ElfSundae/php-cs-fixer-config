@@ -9,5 +9,9 @@
                 "curly_brace_block"
             ]
         }
-    }
+    },
+    "exclude": [
+        "third",
+        "legacy"
+    ]
 }

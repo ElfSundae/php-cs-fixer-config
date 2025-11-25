@@ -8,10 +8,11 @@ use Brick\VarExporter\VarExporter;
 $pcfConfigFile = __DIR__.'/.php-cs-fixer.php';
 $pintConfigFile = __DIR__.'/pint.json';
 
-$customRules = require __DIR__.'/assets/custom-rules.php';
-
 // Generate php-cs-fixer config file
-$pcfRules = array_merge(require __DIR__.'/assets/laravel-ruleset.php', $customRules);
+$pcfRules = array_merge(
+    require __DIR__.'/assets/laravel-ruleset.php',
+    require __DIR__.'/assets/custom-rules.php'
+);
 ksort($pcfRules);
 
 $pcfConfig = file_get_contents(__DIR__.'/assets/.php-cs-fixer.template.php');
@@ -22,10 +23,7 @@ file_put_contents($pcfConfigFile, $pcfConfig);
 echo 'Generated PHP CS Fixer configuration file: '.$pcfConfigFile.PHP_EOL;
 
 // Generate Laravel Pint config file
-$pintConfig = [
-    'preset' => 'laravel',
-    'rules' => $customRules,
-];
+$pintConfig = require __DIR__.'/assets/pint.config.php';
 file_put_contents($pintConfigFile, json_encode(
     $pintConfig, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
 ));
