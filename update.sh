@@ -3,12 +3,14 @@ set -euo pipefail
 
 # Install dependencies and generate new configuration files.
 
-# Determine sed in-place editing option for macOS or Linux
-if [[ "$(uname)" == "Darwin" ]]; then
-    SED_INPLACE=(-i '')
-else
-    SED_INPLACE=(-i)
-fi
+# `sed -i` replacement function compatible with Linux/macOS.
+sed_in_place() {
+    if sed --version >/dev/null 2>&1; then
+        sed -i "$@"
+    else
+        sed -i '' "$@"
+    fi
+}
 
 cd "$(dirname "$0")"
 
@@ -18,9 +20,9 @@ composer install -q
 laravel=assets/laravel-ruleset.php
 echo "Updating $laravel..."
 if curl -fsSL -o "$laravel" https://raw.githubusercontent.com/laravel/pint/HEAD/resources/presets/laravel.php; then
-    sed "${SED_INPLACE[@]}" '/^use .*;/ { N; d; }' "$laravel"
-    sed "${SED_INPLACE[@]}" 's/return .*(\[/return [/' "$laravel"
-    sed "${SED_INPLACE[@]}" 's/]);/];/' "$laravel"
+    sed_in_place '/^use .*;/ { N; d; }' "$laravel"
+    sed_in_place 's/return .*(\[/return [/' "$laravel"
+    sed_in_place 's/]);/];/' "$laravel"
 else
     git restore "$laravel"
 fi
