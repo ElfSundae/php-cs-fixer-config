@@ -17,7 +17,7 @@ ksort($pcfRules);
 
 $pcfConfig = file_get_contents(__DIR__.'/assets/.php-cs-fixer.template.php');
 $pcfConfig = str_replace("['{{exported}}']", VarExporter::export(
-    $pcfRules, VarExporter::INLINE_SCALAR_LIST | VarExporter::TRAILING_COMMA_IN_ARRAY
+    $pcfRules, VarExporter::INLINE_LITERAL_LIST | VarExporter::TRAILING_COMMA_IN_ARRAY
 ), $pcfConfig);
 file_put_contents($pcfConfigFile, $pcfConfig);
 echo 'Generated PHP CS Fixer configuration file: '.$pcfConfigFile.PHP_EOL;
