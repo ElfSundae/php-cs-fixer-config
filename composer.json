@@ -6,7 +6,7 @@
         "php": "^8.2"
     },
     "require-dev": {
-        "brick/varexporter": "^0.6.0",
+        "brick/varexporter": "^0.7.0",
         "friendsofphp/php-cs-fixer": "^3.90",
         "laravel/pint": "^1.25"
     },
